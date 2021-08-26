@@ -1,0 +1,14 @@
+FROM node:alpine
+
+USER node
+
+# had to change permissions due to user:group permission (denied, eacces issue)
+# https://github.com/nodejs/docker-node/issues/740
+RUN mkdir -p /home/node/app
+WORKDIR '/home/node/app'
+
+COPY --chown=node:node ./package.json ./
+RUN npm install
+COPY --chown=node:node ./ ./ 
+
+CMD ["npm", "run", "start"]
