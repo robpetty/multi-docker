@@ -11,17 +11,19 @@ script:
   - docker run -e CI=true rpetty2012/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t rpetty2012/multi-client ./client
-  - docker build -t rpetty2012/multi-nginx ./nginx
-  - docker build -t rpetty2012/multi-server ./server
-  - docker build -t rpetty2012/multi-worker ./worker
+  - docker build -t rpetty2012/multi2-client ./client
+  - docker build -t rpetty2012/multi2-nginx ./nginx
+  - docker build -t rpetty2012/multi2-server ./server
+  - docker build -t rpetty2012/multi2-worker ./worker
 
   # log into docker cli
   # setup encrpyted variables in travis
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push images to docker from travis
-  - docker push rpetty2012/multi-client
-  - docker push rpetty2012/multi-nginx
-  - docker push rpetty2012/multi-server
-  - docker push rpetty2012/multi-worker
+  - docker push rpetty2012/multi2-client
+  - docker push rpetty2012/multi2-nginx
+  - docker push rpetty2012/multi2-server
+  - docker push rpetty2012/multi2-worker
+
+  # adding nothing here to see if anything is triggered.
