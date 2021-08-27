@@ -5,10 +5,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t robpetty/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t rpetty2012/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true robpetty/react-test npm test -- --coverage
+  - docker run -e CI=true rpetty2012/react-test npm test -- --coverage
 
 after_success:
   - docker build -t robpetty/multi-client ./client
@@ -21,7 +21,7 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push images to docker from travis
-  - docker push robpetty/multi-client
-  - docker push robpetty/multi-nginx
-  - docker push robpetty/multi-server
-  - docker push robpetty/multi-wrker
+  - docker push rpetty2012/multi-client
+  - docker push rpetty2012/multi-nginx
+  - docker push rpetty2012/multi-server
+  - docker push rpetty2012/multi-wrker
