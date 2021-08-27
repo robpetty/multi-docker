@@ -11,10 +11,10 @@ script:
   - docker run -e CI=true rpetty2012/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t robpetty/multi-client ./client
-  - docker build -t robpetty/multi-nginx ./nginx
-  - docker build -t robpetty/multi-server ./server
-  - docker build -t robpetty/multi-worker ./worker
+  - docker build -t rpetty2012/multi-client ./client
+  - docker build -t rpetty2012/multi-nginx ./nginx
+  - docker build -t rpetty2012/multi-server ./server
+  - docker build -t rpetty2012/multi-worker ./worker
 
   # log into docker cli
   # setup encrpyted variables in travis
@@ -24,4 +24,4 @@ after_success:
   - docker push rpetty2012/multi-client
   - docker push rpetty2012/multi-nginx
   - docker push rpetty2012/multi-server
-  - docker push rpetty2012/multi-wrker
+  - docker push rpetty2012/multi-worker
