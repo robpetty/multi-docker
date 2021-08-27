@@ -1,0 +1,27 @@
+language: generic 
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t robpetty/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true robpetty/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t robpetty/multi-client ./client
+  - docker build -t robpetty/multi-nginx ./nginx
+  - docker build -t robpetty/multi-server ./server
+  - docker build -t robpetty/multi-worker ./worker
+
+  # log into docker cli
+  # setup encrpyted variables in travis
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # push images to docker from travis
+  - docker push robpetty/multi-client
+  - docker push robpetty/multi-nginx
+  - docker push robpetty/multi-server
+  - docker push robpetty/multi-wrker
