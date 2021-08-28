@@ -154,4 +154,7 @@ app.listen(5000, err => {
         var hostname = os.hostname();
 
         console.log("os.hostname is " + hostname);
+
+        // postgres issue
+        console.log("Postgres host is: " + keys.pgHost);
 });
