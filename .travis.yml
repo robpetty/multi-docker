@@ -26,4 +26,15 @@ after_success:
   - docker push rpetty2012/multi-server
   - docker push rpetty2012/multi-worker
 
-  # adding nothing here to see if anything is triggered.
+  # deploy section for Travis to tell EBS grab the project.
+  deploy:
+    provider: elasticbeanstalk
+    region: 'us-east-2'
+    app: 'multi-docker'
+    env: 'MultiDocker-env'
+    bucket_name: 'elasticbeanstalk-us-east-2-353084998536'
+    bucket_path: 'docker-multi'
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
